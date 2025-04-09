@@ -83,3 +83,17 @@ let t1 = typeof var4; // "string"
 
 // 삼항 연산자 (항을 3개 사용한다)
 let var5 = var4 % 2 === 0 ? "짝수" : "홀수";
+
+// ===========================================
+switch (var4) {
+  case 1: {
+    console.log("숫자 1입니다.");
+  }
+  case "일": {
+    console.log("문자 1입니다");
+    break; // break를 사용하지 않으면 다음 case로 넘어감
+  }
+  default: {
+    console.log("도경수 노래 잘부릅니다");
+  }
+}
