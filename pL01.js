@@ -62,3 +62,24 @@ console.log(strToNum1); // 20
 let strNum2 = "200개";
 console.log(Number(strNum2)); // NaN
 console.log(parseInt(strNum2)); // 20, parseInt: 순수 숫자로 이루어져있지 않은 문자열도 정상적 변환, 단 첫 글자가 숫자가 아니면 NaN
+
+// ===========================================
+
+// 비교 연산자
+let comp1 = 10 == "10"; // 값만 비교, true
+let comp2 = 10 === "10"; // 값과 타입 모두 비교, false
+
+// null 병합 연산자 - null, undefined가 아닌 값을 찾아냄
+let var1;
+let var2 = 10;
+
+let var3 = var1 ?? var2; // var1이 null 또는 undefined가 아니면 var1을 반환, 그렇지 않으면 var2를 반환
+
+// typeof 연산자
+let var4 = 1;
+var4 = "일";
+
+let t1 = typeof var4; // "string"
+
+// 삼항 연산자 (항을 3개 사용한다)
+let var5 = var4 % 2 === 0 ? "짝수" : "홀수";
