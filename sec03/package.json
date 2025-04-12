@@ -1,0 +1,20 @@
+{
+  "author": "",
+  "description": "",
+  "keywords": [
+    "실습"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "sec03",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mungsil/one-bite-react/sec03"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
