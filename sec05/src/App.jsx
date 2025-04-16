@@ -1,15 +1,23 @@
 import "./App.css";
-// import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
-import Header from "./components/Header"; // ESM 써도 파일 확장자 생략 가능(Vite 덕분임)
-import Main from "./components/Main.jsx";
+import Button from "./components/Button";
+import Header from "./components/Header";
+
+// props: 일반적인 값, html 요소, 컴포넌트까지 전달가능, (html 요소, 컴포넌트)는 children으로 전달됨
 
 function App() {
+  const rabbitButtonProps = {
+    text: "토끼",
+    color: "brown",
+  };
+
   return (
     <>
-      <Header />
-      <Main />
-      <Footer />
+      <Button {...rabbitButtonProps} />
+      <Button text="정말" />
+      <Button text="귀여워">
+        <div> 용뭉실 </div>
+        <Header />
+      </Button>
     </>
   );
 }
