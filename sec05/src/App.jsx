@@ -1,23 +1,24 @@
+import { useState } from "react";
 import "./App.css";
-import Button from "./components/Button";
-import Header from "./components/Header";
-
-// props: 일반적인 값, html 요소, 컴포넌트까지 전달가능, (html 요소, 컴포넌트)는 children으로 전달됨
 
 function App() {
-  const rabbitButtonProps = {
-    text: "토끼",
-    color: "brown",
-  };
+  // const state = useState(0);
+  // useState가 아닌 일반 변수로 선언 시, state가 변경되어도 렌더링이 되지 않음.
+  const [count, setCount] = useState(0); // state: 0, setState: function to change state
+  const [light, setLight] = useState("OFF"); // state: false, setState: function to change state
 
   return (
     <>
-      <Button {...rabbitButtonProps} />
-      <Button text="정말" />
-      <Button text="귀여워">
-        <div> 용뭉실 </div>
-        <Header />
-      </Button>
+      <div>
+        <h1>{light}</h1>
+        <button onClick={() => setLight(light === "ON" ? "OFF" : "ON")}>
+          {light === "ON" ? "불 끄기" : "불 켜기"}
+        </button>
+      </div>
+      <h1>
+        {count}
+        <button onClick={() => setCount(count + 1)}>증가</button>
+      </h1>
     </>
   );
 }
