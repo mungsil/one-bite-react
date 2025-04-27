@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const Register = () => {
   const [input, setInput] = useState({
@@ -8,7 +8,14 @@ const Register = () => {
     bio: "",
   });
 
+  // useRef를 이용해서 초기화하지 않고, 일반 변수처럼 초기화하면 Register 컴포넌트가 리렌더링 될 때마다 초기값으로 초기화된다.
+  // useRef는 컴포넌트가 리렌더링 되어도 초기값을 유지한다.
+  const countRef = useRef(0);
+  const inputRef = useRef();
+
   const onChange = (e) => {
+    countRef.current++;
+    console.log(countRef.current);
     console.log(e.target.name, e.target.value);
     setInput({
       ...input,
@@ -16,10 +23,18 @@ const Register = () => {
     });
   };
 
+  const onSubmit = () => {
+    if (input.name === "") {
+      console.log(inputRef.current);
+      inputRef.current.focus();
+    }
+  };
+
   return (
     <div>
       <div>
         <input
+          ref={inputRef}
           name="name"
           value={input.name}
           onChange={onChange}
@@ -49,6 +64,7 @@ const Register = () => {
         <textarea name="bio" value={input.bio} onChange={onChange} />
         {input.bio}
       </div>
+      <button onClick={onSubmit}>제출</button>
     </div>
   );
 };
