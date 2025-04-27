@@ -1,9 +1,10 @@
 import Regitster from "./components/Register";
+import HookExam from "./components/HookExam";
 
 function App() {
   return (
     <>
-      <Regitster />
+      <HookExam />
     </>
   );
 }
