@@ -6,11 +6,11 @@ import List from "./components/list/List";
 import Editor from "./components/editor/Editor";
 
 const mockData = [
-  { id: 0, content: "동태찜", date: new Date().toDateString(), isClear: false },
+  { id: 0, content: "동태찜", date: new Date().getTime(), isClear: false },
   {
     id: 1,
     content: "바닐라 라떼",
-    date: new Date().toDateString(),
+    date: new Date().getTime(),
     isClear: true,
   },
 ];
@@ -33,7 +33,7 @@ function App() {
     <div className="App">
       <Header />
       <Editor onSubmit={handleAddItem} />
-      <List />
+      <List items={items} />
     </div>
   );
 }

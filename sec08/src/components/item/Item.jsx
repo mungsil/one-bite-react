@@ -1,11 +1,11 @@
 import "./Item.css";
 
-const Item = () => {
+const Item = ({ id, content, date, isClear }) => {
   return (
     <div className="Item">
-      <input type="checkbox" />
-      <div className="content">add</div>
-      <div className="date">Date</div>
+      <input checked={isClear} type="checkbox" />
+      <div className="content">{content}</div>
+      <div className="date">{new Date(date).toLocaleDateString()}</div>
       <button>삭제</button>
     </div>
   );
