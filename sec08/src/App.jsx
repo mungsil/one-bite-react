@@ -23,7 +23,7 @@ function App() {
     const newItem = {
       id: idRef.current++,
       content: newContent,
-      date: new Date().toTimeString(),
+      date: new Date().getTime(),
       isCompleted: false,
     };
     setItems([newItem, ...items]);
@@ -37,11 +37,19 @@ function App() {
     );
   };
 
+  const handleDeleteItem = (id) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
   return (
     <div className="App">
       <Header />
       <Editor onSubmit={handleAddItem} />
-      <List items={items} onCheckItem={handleCheckItem} />
+      <List
+        items={items}
+        onCheckItem={handleCheckItem}
+        onDeleteItem={handleDeleteItem}
+      />
     </div>
   );
 }

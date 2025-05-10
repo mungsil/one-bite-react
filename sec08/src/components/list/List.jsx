@@ -2,7 +2,7 @@ import "./List.css";
 import Item from "../item/Item";
 import { useState } from "react";
 
-const List = ({ items, onCheckItem }) => {
+const List = ({ items, onCheckItem, onDeleteItem }) => {
   const [input, setInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -45,7 +45,14 @@ const List = ({ items, onCheckItem }) => {
       />
       <div className="added_items_wrapper">
         {searchedItems.map((item) => {
-          return <Item key={item.id} {...item} onCheck={onCheckItem} />;
+          return (
+            <Item
+              key={item.id}
+              {...item}
+              onCheck={onCheckItem}
+              onDelete={onDeleteItem}
+            />
+          );
         })}
       </div>
     </div>
