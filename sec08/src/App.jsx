@@ -29,11 +29,19 @@ function App() {
     setItems([newItem, ...items]);
   };
 
+  const handleCheckItem = (id) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
+      )
+    );
+  };
+
   return (
     <div className="App">
       <Header />
       <Editor onSubmit={handleAddItem} />
-      <List items={items} />
+      <List items={items} onCheckItem={handleCheckItem} />
     </div>
   );
 }

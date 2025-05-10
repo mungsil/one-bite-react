@@ -2,7 +2,7 @@ import "./List.css";
 import Item from "../item/Item";
 import { useState } from "react";
 
-const List = ({ items }) => {
+const List = ({ items, onCheckItem }) => {
   const [input, setInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -22,7 +22,14 @@ const List = ({ items }) => {
       return items;
     }
 
-    return items.filter((item) => item.content.includes(searchTerm));
+    const result = items.filter((item) => item.content.includes(searchTerm));
+    if (result.length == 0) {
+      alert("검색 결과가 없습니다.");
+      setSearchTerm("");
+      return items;
+    }
+
+    return result;
   };
 
   const searchedItems = getSearchedResult();
@@ -38,7 +45,7 @@ const List = ({ items }) => {
       />
       <div className="added_items_wrapper">
         {searchedItems.map((item) => {
-          return <Item key={item.id} {...item} />;
+          return <Item key={item.id} {...item} onCheck={onCheckItem} />;
         })}
       </div>
     </div>
