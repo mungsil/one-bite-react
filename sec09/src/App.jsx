@@ -5,6 +5,8 @@ import Header from "./components/header/Header";
 import List from "./components/list/List";
 import Editor from "./components/editor/Editor";
 
+import Exam from "./components/playground/Exam";
+
 const mockData = [
   { id: 0, content: "동태찜", date: new Date().getTime(), isClear: false },
   {
@@ -43,13 +45,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Exam />
+      {/* <Header />
       <Editor onSubmit={handleAddItem} />
       <List
         items={items}
         onCheckItem={handleCheckItem}
         onDeleteItem={handleDeleteItem}
-      />
+      /> */}
     </div>
   );
 }
