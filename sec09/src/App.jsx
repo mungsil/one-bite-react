@@ -1,11 +1,10 @@
 import "./App.css";
-import { useState, useRef } from "react";
+import { useRef } from "react";
+import { useReducer } from "react";
 
 import Header from "./components/header/Header";
 import List from "./components/list/List";
 import Editor from "./components/editor/Editor";
-
-import Exam from "./components/playground/Exam";
 
 const mockData = [
   { id: 0, content: "동태찜", date: new Date().getTime(), isClear: false },
@@ -17,42 +16,67 @@ const mockData = [
   },
 ];
 
+function reducer(items, action) {
+  switch (action.type) {
+    case "ADD":
+      return [action.data, ...items];
+
+    case "CHECK": {
+      return items.map((item) => {
+        item.id === action.id
+          ? {
+              ...item,
+              isCompleted: !item.isCompleted,
+            }
+          : item;
+      });
+    }
+
+    case "DELETE":
+      return items.filter((item) => item.id != action.id);
+  }
+}
+
 function App() {
-  const [items, setItems] = useState(mockData);
+  const [items, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(2);
 
   const handleAddItem = (newContent) => {
-    const newItem = {
-      id: idRef.current++,
-      content: newContent,
-      date: new Date().getTime(),
-      isCompleted: false,
-    };
-    setItems([newItem, ...items]);
+    dispatch({
+      type: "ADD",
+      data: {
+        id: idRef.current,
+        content: newContent,
+        date: new Date().getTime(),
+        isCompleted: false,
+      },
+    });
+    idRef.current += 1;
   };
 
   const handleCheckItem = (id) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
-      )
-    );
+    dispatch({
+      type: "CHECK",
+      id: id,
+    });
   };
 
   const handleDeleteItem = (id) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    dispatch({
+      type: "DELETE",
+      id: id,
+    });
   };
 
   return (
     <div className="App">
-      <Exam />
-      {/* <Header />
+      <Header />
       <Editor onSubmit={handleAddItem} />
       <List
         items={items}
         onCheckItem={handleCheckItem}
         onDeleteItem={handleDeleteItem}
-      /> */}
+      />
     </div>
   );
 }
