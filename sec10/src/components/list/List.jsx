@@ -1,6 +1,6 @@
 import "./List.css";
 import Item from "../item/Item";
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 const List = ({ items, onCheckItem, onDeleteItem }) => {
   const [input, setInput] = useState("");
@@ -17,22 +17,21 @@ const List = ({ items, onCheckItem, onDeleteItem }) => {
     }
   };
 
-  const getSearchedResult = () => {
-    if (searchTerm === "") {
-      return items;
-    }
+  // useMemo는 사이드 이펙트를 가지지 않도록 설계
+  const searchedItems = useMemo(() => {
+    if (!searchTerm) return items;
+    return items.filter((item) =>
+      item.content.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm, items]);
 
-    const result = items.filter((item) => item.content.includes(searchTerm));
-    if (result.length == 0) {
+  // 사이드 이펙트는 useEffect를 사용
+  useEffect(() => {
+    if (searchTerm && searchedItems.length === 0) {
       alert("검색 결과가 없습니다.");
       setSearchTerm("");
-      return items;
     }
-
-    return result;
-  };
-
-  const searchedItems = getSearchedResult();
+  }, [searchedItems, searchTerm]);
 
   return (
     <div className="List">
