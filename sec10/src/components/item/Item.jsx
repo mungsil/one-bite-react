@@ -12,6 +12,10 @@ const Item = ({ id, content, date, isClear, onCheck, onDelete }) => {
   );
 };
 
+// 고차 컴포넌트 (HOC)
+export default memo(Item);
+
+/* 
 export default memo(Item, (prevProps, nextProps) => {
   // True를 리턴하면 리렌더링 하지 않음
   // False를 리턴하면 리렌더링 함
@@ -38,4 +42,3 @@ export default memo(Item, (prevProps, nextProps) => {
     prevProps.date === nextProps.date &&
     prevProps.isClear === nextProps.isClear
   ); */
-});

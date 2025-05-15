@@ -1,6 +1,7 @@
 import "./App.css";
-import { useRef } from "react";
+import { use, useRef } from "react";
 import { useReducer } from "react";
+import { useCallback } from "react";
 
 import Header from "./components/header/Header";
 import List from "./components/list/List";
@@ -41,7 +42,7 @@ function App() {
   const [items, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(2);
 
-  const handleAddItem = (newContent) => {
+  const handleAddItem = useCallback((newContent) => {
     dispatch({
       type: "ADD",
       data: {
@@ -52,21 +53,24 @@ function App() {
       },
     });
     idRef.current += 1;
-  };
+  }, []);
 
-  const handleCheckItem = (id) => {
+  const handleCheckItem = useCallback((id) => {
     dispatch({
       type: "CHECK",
       id: id,
     });
-  };
+  }, []);
 
-  const handleDeleteItem = (id) => {
+  const handleDeleteItem = useCallback((id) => {
     dispatch({
       type: "DELETE",
       id: id,
     });
-  };
+  }, []);
+
+  /*   // 마운트 시점에만 실행되는 함수 -> dependencies가 비어있으므로
+  const func = useCallback(() => {}, []); */
 
   return (
     <div className="App">
