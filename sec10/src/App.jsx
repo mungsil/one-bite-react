@@ -22,14 +22,14 @@ function reducer(items, action) {
       return [action.data, ...items];
 
     case "CHECK": {
-      return items.map((item) => {
+      return items.map((item) =>
         item.id === action.id
           ? {
               ...item,
-              isCompleted: !item.isCompleted,
+              isClear: !item.isClear,
             }
-          : item;
-      });
+          : item
+      );
     }
 
     case "DELETE":
@@ -48,7 +48,7 @@ function App() {
         id: idRef.current,
         content: newContent,
         date: new Date().getTime(),
-        isCompleted: false,
+        isClear: false,
       },
     });
     idRef.current += 1;
