@@ -21,7 +21,7 @@ const List = ({ items, onCheckItem, onDeleteItem }) => {
   const searchedItems = useMemo(() => {
     if (!searchTerm) return items;
     return items.filter((item) =>
-      item.content.toLowerCase().includes(searchTerm.toLowerCase())
+      item.content.includes(searchTerm.toLowerCase())
     );
   }, [searchTerm, items]);
 
