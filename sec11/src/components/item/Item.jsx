@@ -1,13 +1,20 @@
 import "./Item.css";
-import { memo } from "react";
+import { ItemContext } from "../../App";
+import { memo, useContext } from "react";
 
-const Item = ({ id, content, date, isClear, onCheck, onDelete }) => {
+const Item = ({ id, content, date, isClear }) => {
+  const { handleCheckItem, handleDeleteItem } = useContext(ItemContext);
+
   return (
     <div className="Item">
-      <input checked={isClear} type="checkbox" onChange={() => onCheck(id)} />
+      <input
+        checked={isClear}
+        type="checkbox"
+        onChange={() => handleCheckItem(id)}
+      />
       <div className="content">{content}</div>
       <div className="date">{new Date(date).toLocaleDateString()}</div>
-      <button onClick={() => onDelete(id)}>삭제</button>
+      <button onClick={() => handleDeleteItem(id)}>삭제</button>
     </div>
   );
 };

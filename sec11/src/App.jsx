@@ -2,6 +2,7 @@ import "./App.css";
 import { use, useRef } from "react";
 import { useReducer } from "react";
 import { useCallback } from "react";
+import { createContext } from "react";
 
 import Header from "./components/header/Header";
 import List from "./components/list/List";
@@ -16,6 +17,8 @@ const mockData = [
     isClear: true,
   },
 ];
+
+export const ItemContext = createContext();
 
 function reducer(items, action) {
   switch (action.type) {
@@ -75,12 +78,16 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Editor onSubmit={handleAddItem} />
-      <List
-        items={items}
-        onCheckItem={handleCheckItem}
-        onDeleteItem={handleDeleteItem}
-      />
+      <ItemContext.Provider
+        value={{ handleAddItem, items, handleCheckItem, handleDeleteItem }}
+      >
+        <Editor onSubmit={handleAddItem} />
+        <List
+          items={items}
+          onCheckItem={handleCheckItem}
+          onDeleteItem={handleDeleteItem}
+        />
+      </ItemContext.Provider>
     </div>
   );
 }

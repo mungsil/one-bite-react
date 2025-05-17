@@ -1,10 +1,12 @@
 import "./List.css";
 import Item from "../item/Item";
-import { useState, useMemo, useEffect } from "react";
+import { ItemContext } from "../../App";
+import { useState, useMemo, useEffect, useContext } from "react";
 
-const List = ({ items, onCheckItem, onDeleteItem }) => {
+const List = () => {
   const [input, setInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const { items } = useContext(ItemContext);
 
   const setInputValue = (e) => {
     setInput(e.target.value);
@@ -44,14 +46,7 @@ const List = ({ items, onCheckItem, onDeleteItem }) => {
       />
       <div className="added_items_wrapper">
         {searchedItems.map((item) => {
-          return (
-            <Item
-              key={item.id}
-              {...item}
-              onCheck={onCheckItem}
-              onDelete={onDeleteItem}
-            />
-          );
+          return <Item key={item.id} {...item} />;
         })}
       </div>
     </div>

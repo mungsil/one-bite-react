@@ -1,7 +1,10 @@
 import "./Editor.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { ItemContext } from "../../App";
 
-const Editor = ({ onSubmit }) => {
+const Editor = () => {
+  const { handleAddItem } = useContext(ItemContext);
+
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef();
 
@@ -20,7 +23,7 @@ const Editor = ({ onSubmit }) => {
       inputRef.current.focus();
       return;
     }
-    onSubmit(inputValue);
+    handleAddItem(inputValue);
     setInputValue("");
   };
 
