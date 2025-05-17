@@ -1,9 +1,9 @@
 import "./Item.css";
-import { ItemContext } from "../../App";
+import { ItemDispatchContext } from "../../App";
 import { memo, useContext } from "react";
 
 const Item = ({ id, content, date, isClear }) => {
-  const { handleCheckItem, handleDeleteItem } = useContext(ItemContext);
+  const { handleCheckItem, handleDeleteItem } = useContext(ItemDispatchContext);
 
   return (
     <div className="Item">

@@ -2,6 +2,7 @@ import "./App.css";
 import { use, useRef } from "react";
 import { useReducer } from "react";
 import { useCallback } from "react";
+import { useMemo } from "react";
 import { createContext } from "react";
 
 import Header from "./components/header/Header";
@@ -18,7 +19,8 @@ const mockData = [
   },
 ];
 
-export const ItemContext = createContext();
+export const ItemStateContext = createContext();
+export const ItemDispatchContext = createContext();
 
 function reducer(items, action) {
   switch (action.type) {
@@ -74,20 +76,23 @@ function App() {
 
   /*   // 마운트 시점에만 실행되는 함수 -> dependencies가 비어있으므로
   const func = useCallback(() => {}, []); */
+  const memoizedDispatch = useMemo(() => {
+    return {
+      handleAddItem,
+      handleCheckItem,
+      handleDeleteItem,
+    };
+  }, []);
 
   return (
     <div className="App">
       <Header />
-      <ItemContext.Provider
-        value={{ handleAddItem, items, handleCheckItem, handleDeleteItem }}
-      >
-        <Editor onSubmit={handleAddItem} />
-        <List
-          items={items}
-          onCheckItem={handleCheckItem}
-          onDeleteItem={handleDeleteItem}
-        />
-      </ItemContext.Provider>
+      <ItemStateContext.Provider value={items}>
+        <ItemDispatchContext.Provider value={memoizedDispatch}>
+          <Editor />
+          <List />
+        </ItemDispatchContext.Provider>
+      </ItemStateContext.Provider>
     </div>
   );
 }

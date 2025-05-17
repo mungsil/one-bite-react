@@ -1,12 +1,12 @@
 import "./List.css";
 import Item from "../item/Item";
-import { ItemContext } from "../../App";
+import { ItemStateContext } from "../../App";
 import { useState, useMemo, useEffect, useContext } from "react";
 
 const List = () => {
   const [input, setInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const { items } = useContext(ItemContext);
+  const items = useContext(ItemStateContext);
 
   const setInputValue = (e) => {
     setInput(e.target.value);

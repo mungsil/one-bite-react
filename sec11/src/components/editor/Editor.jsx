@@ -1,9 +1,9 @@
 import "./Editor.css";
 import { useState, useRef, useContext } from "react";
-import { ItemContext } from "../../App";
+import { ItemDispatchContext } from "../../App";
 
 const Editor = () => {
-  const { handleAddItem } = useContext(ItemContext);
+  const { handleAddItem } = useContext(ItemDispatchContext);
 
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef();
