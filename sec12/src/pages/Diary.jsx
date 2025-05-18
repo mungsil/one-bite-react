@@ -1,5 +1,9 @@
+import { useParams } from "react-router-dom";
+
 const Diary = () => {
-  return <div>공개 일기장</div>;
+  const params = useParams();
+
+  return <div>{params.id}의 공개 일기장</div>;
 };
 
 export default Diary;
