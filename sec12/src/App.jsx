@@ -1,21 +1,37 @@
 import "./App.css";
 import Home from "./pages/Home";
 import Diary from "./pages/Diary";
+import Edit from "./pages/Edit";
 import New from "./pages/New";
 import Notfound from "./pages/NotFound";
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import Button from "./components/Button";
 import Header from "./components/Header";
+import { useReducer } from "react";
 
 import { getEmotionImage } from "./util/get-emotion-image";
 
-function App() {
-  const nav = useNavigate();
+function reducer(state, action) {
+  return state;
+}
 
-  const onClickBtn = () => {
-    // useNavigate 훅을 사용하여 페이지 이동, 이벤트 핸들러에서 사용
-    nav("/new");
-  };
+const mockData = [
+  {
+    id: 1,
+    date: new Date().getTime(),
+    content: "치이카와 귀여워",
+    emotionId: 1,
+  },
+  {
+    id: 2,
+    date: new Date().getTime(),
+    content: "인형뽑기 이제 안해",
+    emotionId: 2,
+  },
+];
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, [mockData]);
 
   return (
     <>
@@ -30,31 +46,12 @@ function App() {
           console.log("새 일기 클릭");
         }}
       ></Header>
-      <Button
-        text={"버튼1"}
-        onClick={() => {
-          console.log("버튼1 클릭");
-        }}
-        type={"DEFAULT"}
-      ></Button>
-      <Button
-        text={"버튼2"}
-        onClick={() => {
-          console.log("버튼2 클릭");
-        }}
-        type={"POSITIVE"}
-      ></Button>
-      <Button
-        text={"버튼3"}
-        onClick={() => {
-          console.log("버튼3 클릭");
-        }}
-        type={"NEGATIVE"}
-      ></Button>
+
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/new" element={<New />}></Route>
         <Route path="/diary/:id" element={<Diary />}></Route>
+        <Route path="/edit/:id" element={<Edit />}></Route>
         <Route path="*" element={<Notfound />}></Route>
       </Routes>
     </>
