@@ -82,18 +82,6 @@ function App() {
 
   return (
     <>
-      <Header
-        leftBtnText={"뒤로가기"}
-        onClickLeftBtn={() => {
-          console.log("뒤로가기 클릭");
-        }}
-        centerText={"일기장"}
-        rightBtnText={"새 일기"}
-        onClickRightBtn={() => {
-          console.log("새 일기 클릭");
-        }}
-      ></Header>
-
       <DiaryStateContext.Provider value={data}>
         <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
           <Routes>
