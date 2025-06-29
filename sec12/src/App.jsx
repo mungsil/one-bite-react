@@ -24,28 +24,43 @@ function reducer(state, action) {
     case "DELETE": {
       return state.filter((it) => it.id !== action.data);
     }
+    default:
+      return state;
   }
 }
 
 const mockData = [
   {
     id: 1,
-    date: new Date().getTime(),
+    date: new Date("2025-06-29").getTime(),
     content: "치이카와 귀여워",
     emotionId: 1,
   },
   {
     id: 2,
-    date: new Date().getTime(),
+    date: new Date("2025-06-28").getTime(),
+    content: "인형뽑기 이제 안해",
+    emotionId: 2,
+  },
+  {
+    id: 3,
+    date: new Date("2025-05-31").getTime(),
+    content: "인형뽑기 이제 안해",
+    emotionId: 2,
+  },
+  {
+    id: 4,
+    date: new Date("2025-05-25").getTime(),
     content: "인형뽑기 이제 안해",
     emotionId: 2,
   },
 ];
 
-const DiaryStateContext = createContext();
-const DiaryDispatchContext = createContext();
+export const DiaryStateContext = createContext();
+export const DiaryDispatchContext = createContext();
 
 function App() {
+  console.log("앱 목데이터", mockData);
   const [data, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(mockData.length + 1);
 
